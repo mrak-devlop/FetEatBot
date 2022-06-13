@@ -31,10 +31,10 @@ class SelectedDown(private val update: Update, private val bot: FeatEatBot) {
             }
             basicMetabolism = round(basicMetabolism * 100.0) / 100.0
             var metabolismBottomLine =
-                basicMetabolism - CalcPercent(basicMetabolism.toFloat(), 10).calc()
+                basicMetabolism - CalcPercent(basicMetabolism.toFloat(), 20).calc()
             metabolismBottomLine = round(metabolismBottomLine * 100.0) / 100.0
             var metabolismUpperLine =
-                basicMetabolism - CalcPercent(basicMetabolism.toFloat(), 20).calc()
+                basicMetabolism - CalcPercent(basicMetabolism.toFloat(), 10).calc()
             metabolismUpperLine = round(metabolismUpperLine * 100.0) / 100.0
 
             val message = SendMessage()
@@ -46,16 +46,49 @@ class SelectedDown(private val update: Update, private val bot: FeatEatBot) {
                 e.printStackTrace()
             }
 
-            val proteins = round(
-                CalcPercent(basicMetabolism.toFloat(), 30).calc() * 100.0) / 100.0
-            val fats = round(
-                CalcPercent(basicMetabolism.toFloat(), 20).calc() * 100.0) / 100.0
-            val carbohydrates = round(
-                CalcPercent(basicMetabolism.toFloat(), 50).calc() * 100.0) / 100.0
-            val proteinsInGram = round((proteins/4) * 100.0) / 100.0
-            val fatsInGram = round((fats/9) * 100.0) / 100.0
-            val carbohydratesInGram = round((carbohydrates/4) * 100.0) / 100.0
+            val proteinsBottomLine = round(
+                CalcPercent(metabolismBottomLine.toFloat(), 40).calc() * 100.0) / 100.0
+            val fatsBottomLine = round(
+                CalcPercent(metabolismBottomLine.toFloat(), 35).calc() * 100.0) / 100.0
+            val carbohydratesBottomLine = round(
+                CalcPercent(metabolismBottomLine.toFloat(), 25).calc() * 100.0) / 100.0
+            val proteinsInGramBottomLine = round((proteinsBottomLine/4) * 100.0) / 100.0
+            val fatsInGramBottomLine = round((fatsBottomLine/9) * 100.0) / 100.0
+            val carbohydratesInGramBottomLine = round((carbohydratesBottomLine/4) * 100.0) / 100.0
 
+            val proteinsUpperLine = round(
+                CalcPercent(metabolismUpperLine.toFloat(), 40).calc() * 100.0) / 100.0
+            val fatsUpperLine = round(
+                CalcPercent(metabolismUpperLine.toFloat(), 35).calc() * 100.0) / 100.0
+            val carbohydratesUpperLine = round(
+                CalcPercent(metabolismUpperLine.toFloat(), 25).calc() * 100.0) / 100.0
+            val proteinsInGramUpperLine = round((proteinsUpperLine/4) * 100.0) / 100.0
+            val fatsInGramUpperLine = round((fatsUpperLine/9) * 100.0) / 100.0
+            val carbohydratesInGramUpperLine = round((carbohydratesUpperLine/4) * 100.0) / 100.0
+
+            message.text = "Белка 40% = от $proteinsBottomLine до $proteinsUpperLine ккал = \n" +
+                    "от $proteinsInGramBottomLine до $proteinsInGramUpperLine г."
+            try {
+                bot.execute(message)
+            } catch (e: TelegramApiException) {
+                e.printStackTrace()
+            }
+
+            message.text = "Жиров 35% = от $fatsBottomLine до $fatsUpperLine ккал = \n" +
+            "от $fatsInGramBottomLine до $fatsInGramUpperLine г."
+            try {
+                bot.execute(message)
+            } catch (e: TelegramApiException) {
+                e.printStackTrace()
+            }
+
+            message.text = "Углеводов 25% = от $carbohydratesBottomLine до $carbohydratesUpperLine ккал = \n" +
+                    "от $carbohydratesInGramBottomLine до $carbohydratesInGramUpperLine г."
+            try {
+                bot.execute(message)
+            } catch (e: TelegramApiException) {
+                e.printStackTrace()
+            }
         }
     }
 }

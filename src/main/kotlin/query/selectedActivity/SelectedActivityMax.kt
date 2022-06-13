@@ -1,0 +1,14 @@
+package query.selectedActivity
+
+import FeatEatBot
+import org.telegram.telegrambots.meta.api.objects.Update
+
+class SelectedActivityMax(private val update: Update, private val bot: FeatEatBot) {
+    fun runCheck() {
+        if (update.hasCallbackQuery() && (update.callbackQuery.data == "max")) {
+            val userCallbackId = update.callbackQuery.from.id.toInt()
+            bot.dataUsers[userCallbackId]?.add(4, update.callbackQuery.data)
+            PrintType(update, bot).printButton()
+        }
+    }
+}

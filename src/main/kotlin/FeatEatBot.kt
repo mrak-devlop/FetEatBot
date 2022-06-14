@@ -16,6 +16,7 @@ class FeatEatBot : TelegramLongPollingBot() {
     val processingUsersAge = arrayListOf<Int>()
     val processingUsersHeight = arrayListOf<Int>()
     val processingUsersWeight = arrayListOf<Int>()
+
     // [0] пол, [1] возраст, [2] рост, [3] вес, [4] активность
     val dataUsers = mutableMapOf<Int, MutableList<String>>()
 

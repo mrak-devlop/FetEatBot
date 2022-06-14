@@ -6,7 +6,7 @@ import org.telegram.telegrambots.meta.api.objects.Update
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException
 
 class PrintQueryAge(private val update: Update, private val bot: FeatEatBot) {
-    fun printQuery(){
+    fun printQuery() {
         val message = SendMessage()
         message.chatId = update.callbackQuery.message.chatId.toString()
         message.text = "Сколько вам полных лет?"

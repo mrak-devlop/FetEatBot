@@ -9,8 +9,8 @@ import query.selectedType.SelectedStable
 import query.selectedType.SelectedUp
 
 
-const val FET_EAT_BOT_TOKEN = "5229415074:AAEX2DG4AAqSUxwVadj1sFsg95rX0HQcS74"
-const val BOT_USER_NAME = "FeatEatBot"
+const val FET_EAT_BOT_TOKEN = ""
+const val BOT_USER_NAME = ""
 
 class FeatEatBot : TelegramLongPollingBot() {
     val processingUsersAge = arrayListOf<Int>()
@@ -50,6 +50,7 @@ class FeatEatBot : TelegramLongPollingBot() {
 
         // ответ на /start и показ двух кнопок выбора мужчины или женщины
         StartQuery(update, this).runCheck()
+        HelpQuery(update, this).runCheck()
 
     }
 
